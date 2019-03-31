@@ -1,50 +1,29 @@
 var todoList = {
-    todos: ['item 1', 'item 2', 'item 3'],
-    // displayTodos should show .todoText
-    // displayTodos should tell you if .todos is empty
-    // displayTodos should show .completed
-    displayTodos: function() {
-        if (this.todos.length === 0) {
-            console.log('Your todo list is empty!');
-        }
-        else {
-            console.log('My Todos:');
-            for (var i = 0; i < this.todos.length; i++) {
-                if (this.todos[i].completed === true) {
-                    console.log('(x)', this.todos[i].todoText);
-                } else {
-                    console.log('( )', this.todos[i].todoText);
-                }
-            }
-        }
-    },
+    todos: [],
+    // version 9, REMOVED THE ENTIRE DISPLAY TODOS METHOD
     // todoList.addTodo should add objects
     addTodo: function(todoText) {
         this.todos.push({ todoText: todoText, completed: false });
-        this.displayTodos();
     },
     // todoList.changeTodo should change the todoText property
     changeTodo: function(position, todoText) {
         this.todos[position].todoText = todoText;
-        this.displayTodos();
     },
     deleteTodo: function(position) {
         this.todos.splice(position, 1);
-        this.displayTodos();
     },
     // todoList.toggleCompleted should flip the completed property
     toggleCompleted: function(position) {
         var todo = this.todos[position];
         todo.completed = !todo.completed;
-        this.displayTodos();
     },
     // created new toggleAll method
     // .toggleAll if everything is true, make everything false
-    
+
     toggleAll: function() {
         var totalTodos = this.todos.length;
         var completedTodos = 0;
-        
+
         for (var i = 0; i < totalTodos; i++) {
             if (this.todos[i].completed === true) {
                 completedTodos++;
@@ -55,12 +34,12 @@ var todoList = {
                 this.todos[i].completed = false;
             }
             // otherwise make everything true
-        } else {
+        }
+        else {
             for (var i = 0; i < totalTodos; i++) {
                 this.todos[i].completed = true;
             }
-        }
-        this.displayTodos();
+        };
     }
 };
 
@@ -68,14 +47,13 @@ var todoList = {
 
 
 var handlers = {
-    displayTodos: function() {
-        todoList.displayTodos();
-    },
+// version 9, removed the display todos button function
     // addTodo button function
     addTodo: function() {
         var addTodoTextInput = document.getElementById('addTodoTextInput');
         todoList.addTodo(addTodoTextInput.value);
         addTodoTextInput.value = '';
+        view.displayTodos();
     },
     // changeTodo button function
     changeTodo: function() {
@@ -84,20 +62,45 @@ var handlers = {
         todoList.changeTodo(changeTodoPositionInput.valueAsNumber, changeTodoTextInput.value);
         changeTodoPositionInput.value = '';
         changeTodoTextInput.value = '';
+        view.displayTodos();
     },
     // delete todo button function
     deleteTodo: function() {
         var deleteTodoPositionInput = document.getElementById('deleteTodoPositionInput');
         todoList.deleteTodo(deleteTodoPositionInput.valueAsNumber);
         deleteTodoPositionInput.value = '';
+        view.displayTodos();
     },
     // toggle completed button function
     toggleCompleted: function() {
         var toggleCompletedPositionInput = document.getElementById('toggleCompletedPositionInput');
         todoList.toggleCompleted(toggleCompletedPositionInput.valueAsNumber);
         toggleCompletedPositionInput.value = '';
+        view.displayTodos();
     },
     toggleAll: function() {
         todoList.toggleAll();
+        view.displayTodos();
+    }
+};
+// version 9, created this object for display on the page out of the DOM
+var view = {
+    displayTodos: function() {
+        var todosUl = document.querySelector('ul');
+            todosUl.innerHTML = '';
+        for (var i = 0; i < todoList.todos.length; i++) {
+            var todoLi = document.createElement('li');
+            var todo = todoList.todos[i];
+            var todoTextWithCompletion = '';
+            
+            if (todo.completed === true) {
+                todoTextWithCompletion = '(x) ' + todo.todoText;
+            } else {
+                todoTextWithCompletion = '( ) ' + todo.todoText;
+            }
+            // version 9, accessing the todoLi text content and setting it to todoText property
+            todoLi.textContent = todoTextWithCompletion;
+            todosUl.appendChild('todoLi');
+        }
     }
 };
