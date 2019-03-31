@@ -2,11 +2,37 @@
 <html>
     <head>
         <link rel="stylesheet" href="" type="text/css" />
-        <script type="text/javascript" src="script.js"></script>
+        
         <body>
             <h1>Todo List</h1>
-            <button id='displayTodosButton'>Display Todos</button>
-            <button id='toggleAllButton'>Toggle All</button>
+            <!--created divs to seperate buttons-->
+            <div>
+            <button onclick='handlers.displayTodos()'>Display Todos</button>
+            <button onclick='handlers.toggleAll()'>Toggle All</button>
+            </div>
+            
+            <div>
+                <!--created an add button-->
+                <button onclick='handlers.addTodo()'>Add</button>
+                <input id='addTodoTextInput' type='text'>
+            </div>
+            <!--created a change todo button-->
+            <div>
+                <button onclick='handlers.changeTodo()'>Change Todo</button>
+                <input id='changeTodoPositionInput' type='number'>
+                <input id='changeTodoTextInput' type='text'>
+            </div>
+            <!--created a delete todo button-->
+            <div>
+                <button onclick='handlers.deleteTodo()'>Delete</button>
+                <input id='deleteTodoPositionInput' type='number'>
+            </div>
+            <!--created button for toggling-->
+            <div>
+                <button onclick='handlers.toggleCompleted()'>Toggle Completed</button>
+                <input id='toggleCompletedPositionInput' type='number'>
+            </div>
+            <script type="text/javascript" src="script.js"></script>
         </body>
     </head>
 </html>
