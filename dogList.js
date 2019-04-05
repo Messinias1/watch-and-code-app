@@ -1,14 +1,23 @@
 // store dog Names
 var dogs = ['Caleb', 'Heidi', 'Napoleon', 'Snowbie'];
 
-// display dog names
-console.log('My Dogs:', dogs);
 
-// add new dogs
-dogs.push('Crystal');
-
-// change a dog name
-dogs[0] = 'Hansel';
-
-// delete a dog name
-dogs.splice(0, 1);
+// function to display dog names
+function displayDogs() {
+    console.log('My Dogs:', dogs);
+}
+// function to add new dog names
+function addDogName(dog) {
+    dogs.push(dog);
+    displayDogs();
+}
+// function to change a dog name
+function changeDogName(position, newValue) {
+    dogs[position] = newValue;
+    displayDogs();
+}
+// function to delete a dog name
+function deleteDogName(position) {
+    dogs.splice(position, 1);
+    displayDogs();
+}
