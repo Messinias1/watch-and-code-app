@@ -9,9 +9,10 @@ var dogNames = {
             console.log('My Dogs:');
             for (var i = 0; i < this.dogs.length; i++) {
                 // check if .completed is true
-                if ( this.dogs[i].completed === true) {
+                if (this.dogs[i].completed === true) {
                     console.log('(x)', this.dogs[i].dogText);
-                } else {
+                }
+                else {
                     console.log('( )', this.dogs[i].dogText);
                 }
             }
@@ -35,6 +36,27 @@ var dogNames = {
     toggleCompleted: function(position) {
         var dog = this.dogs[position];
         dog.completed = !dog.completed;
+        this.displayDogs();
+    },
+    // create toggleAll method
+    toggleAll: function() {
+        var totalDogs = this.dogs.length;
+        var completedDogs = 0;
+        for (var i = 0; i < totalDogs; i++) {
+            if (this.dogs[i].completed === true) {
+                completedDogs++;
+            }
+        }
+        if (completedDogs === totalDogs) {
+            for (var i = 0; i < totalDogs; i++) {
+                this.dogs[i].completed = false;
+            }
+        }
+        else {
+            for (var i = 0; i < totalDogs; i++) {
+                this.dogs[i].completed = true;
+            }
+        }
         this.displayDogs();
     }
 };
