@@ -1,10 +1,22 @@
 var dogNames = {
     dogs: [],
-    // displayDogs method
+    // displayDogs should tell if .dogs is empty
     displayDogs: function() {
-        console.log('My Dogs:', this.dogs);
+        if (this.dogs.length === 0) {
+            console.log('Your dog list is empty!');
+        }
+        else {
+            console.log('My Dogs:');
+            for (var i = 0; i < this.dogs.length; i++) {
+                // check if .completed is true
+                if ( this.dogs[i].completed === true) {
+                    console.log('(x)', this.dogs[i].dogText);
+                } else {
+                    console.log('( )', this.dogs[i].dogText);
+                }
+            }
+        }
     },
-    // include an addDogName method
     addDogName: function(dogText) {
         this.dogs.push({
             dogText: dogText,
@@ -12,20 +24,16 @@ var dogNames = {
         });
         this.displayDogs();
     },
-    // include a changeDogName method
     changeDogName: function(position, dogText) {
-        //this.dogs[position] = newValue;
         this.dogs[position].dogText = dogText;
         this.displayDogs();
     },
-    // include a delete dogName method
     deleteDogName: function(position) {
         this.dogs.splice(position, 1);
         this.displayDogs();
     },
-    // include a toggleCompleted method
     toggleCompleted: function(position) {
-        var dog = this.dogNames[position];
+        var dog = this.dogs[position];
         dog.completed = !dog.completed;
         this.displayDogs();
     }
